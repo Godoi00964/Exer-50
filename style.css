@@ -6,6 +6,7 @@
     --text-primary: #1a1a1a;
     --text-light: #ffffff;
     --accent: #1dd1a1;
+    --vidro: rgba(255, 107, 53, 0.2);
 }
 
 * {
@@ -278,7 +279,7 @@ span {
 }
 
 .sobre-img img {
-    width: 420px;
+    width: 520px;
     border-radius: 20px;
     box-shadow: 0 30px 60px rgba(255, 107, 53, 0.2),
                 0 0 60px rgba(255, 107, 53, 0.1);

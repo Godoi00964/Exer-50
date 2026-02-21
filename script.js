@@ -1,3 +1,22 @@
+// ===== CONFIGURAÇÃO EMAILJS =====
+
+const EMAIL_SERVICE_ID = "service_a9m0t7u"; // Ex: "gmail"
+const EMAIL_TEMPLATE_ID = "template_9viu6ns"; // Ex: "template_abc123"
+const DESTINATARIO = "eduardofgodoi@outlook.com"; // Seu email para receber mensagens
+
+// Aguardar e inicializar EmailJS
+let emailjsReady = false;
+function initEmailJS() {
+  if (typeof emailjs !== 'undefined' && !emailjsReady) {
+    emailjs.init("Y0OXuJFsyakFhIeGc");
+    emailjsReady = true;
+    console.log('EmailJS inicializado com sucesso!');
+  } else if (typeof emailjs === 'undefined') {
+    setTimeout(initEmailJS, 500);
+  }
+}
+initEmailJS();
+
 // ===== Menu Responsivo =====
 const menuToggle = document.querySelector('.menu-toggle');
 const navbar = document.querySelector('.navbar');
@@ -71,13 +90,36 @@ if (form) {
     }
 
     if (isValid) {
-      // Show success message
-      showNotification('✓ Mensagem enviada com sucesso! Em breve retornaremos.', 'success');
-      form.reset();
-      
-      // Remove error classes
-      inputs.forEach(input => input.classList.remove('error'));
-      if (textarea) textarea.classList.remove('error');
+      // Enviar email via EmailJS
+      const nomeInput = form.querySelector('input[name="nome"]');
+      const assuntoInput = form.querySelector('input[name="assunto"]');
+      const telefoneInput = form.querySelector('input[name="telefone"]');
+
+      const templateParams = {
+        to_email: DESTINATARIO,
+        from_email: emailInput.value,
+        from_name: nomeInput.value,
+        subject: assuntoInput.value,
+        phone: telefoneInput.value,
+        message: textarea.value
+      };
+
+      // Mostrar loading
+      showNotification('Enviando mensagem...', 'loading');
+
+      emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, templateParams)
+        .then(function(response) {
+          console.log('Email enviado com sucesso!', response.status, response.text);
+          showNotification('✓ Mensagem enviada com sucesso! Em breve retornaremos.', 'success');
+          form.reset();
+          
+          // Remove error classes
+          inputs.forEach(input => input.classList.remove('error'));
+          if (textarea) textarea.classList.remove('error');
+        }, function(error) {
+          console.log('Erro ao enviar email:', error);
+          showNotification('✗ Erro ao enviar. Verifique as configurações do EmailJS.', 'error');
+        });
     } else {
       showNotification('✗ Por favor, preencha todos os campos corretamente.', 'error');
     }
@@ -160,7 +202,7 @@ const observer = new IntersectionObserver(function (entries) {
 }, observerOptions);
 
 // Apply observer to cards and sections
-document.querySelectorAll('.card, .sobre-content, .home-content').forEach(el => {
+document.querySelectorAll('.card, .projetos-card, .sobre-content, .home-content').forEach(el => {
   el.classList.add('fade-out');
   observer.observe(el);
 });

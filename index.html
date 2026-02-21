@@ -86,7 +86,8 @@
         </p>
         <a href="#" class="btn-2">Experiencia</a>
       </div>
-    </section>
+    </section>    
+    
     <!--=======Educação========-->
     <section class="secao" id="educaçao">
       <h2>Diciplinas em Estudo.</h2>
@@ -131,18 +132,18 @@
       <h2 class="contact-me">Contrata <span>Me</span></h2>
       <form action="#">
         <div class="input-box">
-          <input type="text" class="labelInput" placeholder="Nome" />
+          <input type="text" class="labelInput" name="nome" placeholder="Nome" />
 
-          <input type="email" class="labelInput" placeholder="Email" />
+          <input type="email" class="labelInput" name="email" placeholder="Email" />
         </div>
 
         <div class="input-box">
-          <input type="number" class="labelInput" placeholder="Telefone" />
-          <input type="text" class="labelInput" placeholder="Assunto" />
+          <input type="number" class="labelInput" name="telefone" placeholder="Telefone" />
+          <input type="text" class="labelInput" name="assunto" placeholder="Assunto" />
         </div>
         <textarea
-          name=""
-          id=""
+          name="mensagem"
+          id="mensagem"
           cols="30"
           rows="10"
           placeholder="Sua Messagem"
@@ -176,6 +177,7 @@
         © 2025 Eduardo Godoy | Todos os Direitos Reservados
       </p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
