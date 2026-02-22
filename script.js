@@ -8,7 +8,7 @@ const DESTINATARIO = "eduardofgodoi@outlook.com"; // Seu email para receber mens
 let emailjsReady = false;
 function initEmailJS() {
   if (typeof emailjs !== 'undefined' && !emailjsReady) {
-    emailjs.init("Y0OXuJFsyakFhIeGc");
+    emailjs.init("G-wo8jx94GGCrNyaq");
     emailjsReady = true;
     
     // Habilitar botão de envio quando EmailJS estiver pronto
