@@ -10,12 +10,31 @@ function initEmailJS() {
   if (typeof emailjs !== 'undefined' && !emailjsReady) {
     emailjs.init("Y0OXuJFsyakFhIeGc");
     emailjsReady = true;
+    
+    // Habilitar botão de envio quando EmailJS estiver pronto
+    const submitBtn = document.querySelector('.contact-form form input[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.cursor = 'pointer';
+      submitBtn.style.opacity = '1';
+    }
+    
     console.log('EmailJS inicializado com sucesso!');
   } else if (typeof emailjs === 'undefined') {
-    setTimeout(initEmailJS, 500);
+    setTimeout(initEmailJS, 300); // Reduzido para 300ms para resposta mais rápida
   }
 }
-initEmailJS();
+
+// Chamar inicialização e desabilitar botão até carregar
+document.addEventListener('DOMContentLoaded', function() {
+  const submitBtn = document.querySelector('.contact-form form input[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.style.cursor = 'not-allowed';
+    submitBtn.style.opacity = '0.6';
+  }
+  initEmailJS();
+});
 
 // ===== Menu Responsivo =====
 const menuToggle = document.querySelector('.menu-toggle');
@@ -90,6 +109,12 @@ if (form) {
     }
 
     if (isValid) {
+      // Verificar se EmailJS está disponível
+      if (typeof emailjs === 'undefined' || !emailjsReady) {
+        showNotification('✗ Serviço de email ainda está carregando. Aguarde um momento.', 'error');
+        return;
+      }
+
       // Enviar email via EmailJS
       const nomeInput = form.querySelector('input[name="nome"]');
       const assuntoInput = form.querySelector('input[name="assunto"]');
