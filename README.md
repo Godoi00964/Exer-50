@@ -72,7 +72,8 @@ Este é um site portfólio que apresenta:
 
 ### 1. Abrir o Projeto
 ```bash
-# Abra o arquivo index.html em seu navegador
+# Abra o navegador em seu dispostivo e cole o link
+'https://godoi00964.github.io/Exer-50/'
 ```
 
 ### 2. Funcionalidades
